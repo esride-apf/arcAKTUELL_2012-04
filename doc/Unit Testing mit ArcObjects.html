@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Unit Testing mit ArcObjects</title>
+
+  
+</head><body>
+<h1>Unit Testing mit ArcObjects</h1>
+
+<h2>Motivation</h2>
+
+Unit Testing und ArcObjects sind kein einfaches
+Unterfangen. Zum einen muss man die Software so aufbrechen, dass eine
+testfähige Architektur gegeben ist und zum anderen muss man die
+Möglichkeiten
+der ArcObjects kennen um zu wissen wie Objekte im Testkontext erzeugt
+und
+verwendet werden können.<br>
+
+Die erste Herausforderung beantwortet sich durch konsequente Anwendung
+diverser
+Architektur-Pattern und -Best Practices. Allen voran steht dabei, dass
+sich
+eine Komponente nur eine Aufgabe widmet und deren Methoden alle so kurz
+wie
+möglich sein sollten. Damit ergibt sich eine entsprechende Fokussierung
+die
+ihrerseits konkret ohne Seiteneffekte testbar ist.<br>
+
+Schwieriger zu verstehen ist der Testkontext an sich für ArcObjects.
+Möchte man
+beispielsweise eine spezielle Logik auf einem Feature testen, so
+braucht man
+einen Testkandidaten. Allerdings lässt sich ad hoc ein Feature eben
+nicht
+erzeugen, dafür bedarf es beispielsweise einer FeatureClass, deren
+Verwendbarkeit an Workspaces gekoppelt
+ist. Man
+sieht: alleine die Erzeugung eines Features verlangt einen
+Rattenschwanz an
+zusätzlicher Logik.<br>
+
+Ähnliche Fragestellungen ergaben sich natürlich auch in anderen
+Umfeldern, so
+dass sich findige Entwickler Gedanken gemacht haben, wie man am
+einfachsten
+derartige benötigte Objekte erzeugt. Dies war die Geburtsstunde
+sogenannter
+Mocking-Frameworks
+<h2>Mocking-Frameworks</h2>
+
+Ein Mocking Framework hat die Aufgabe Mocks zur Verfügung zu
+stellen. Mocks gehen dabei über einfache Platzhalter-Objekte weit
+hinaus [1]. Sie
+lassen sich mit einer gewissen Logik unterlegen dessen korrekter
+Zugriff von
+außen protokolliert werden kann. Üblicherweise sind Unit Tests meist
+ein
+Status-basiertes Testen - d.h. man verifiziert mit Assert-Logik
+bestimmte Werte nach Ablauf der Logik.<br>
+
+Mocks erlauben ein Verhaltens-basiertes Testen bei dem mittels der
+Zugriff-Protokollierung verifiziert wird, ob die zu testende Logik das
+Objekt
+so aufruft wie es für die Richtigkeit zu erwarten wäre. Dazu kann die
+Reihenfolge von Aufrufen ebenso wie Aufrufparameter geprüft werden.<br>
+
+Für die Erzeugung eines derartigen Mocks an sich wird einfach dynamisch
+eine
+entsprechende Instanz des zu mockenden
+Typen erzeugt.
+Das funktioniert u.a. ausgezeichnet für Instanzen von Interfaces,
+abstrakten
+Klassen und ableitbaren Klassen. Alle bekannten Frameworks (RhinoMocks,
+Moq,
+Dynamic Proxy,
+..) sind dazu in der Lage.<br>
+
+<br>
+<h2>
+
+Links</h2>
+[1] Mocks Aren't Stubs<br>
+http://martinfowler.com/articles/mocksArentStubs.html<br>
+<br>
+<br>
+
+
+</body></html>
