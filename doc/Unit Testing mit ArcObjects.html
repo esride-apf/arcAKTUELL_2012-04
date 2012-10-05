@@ -1,9 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
-  
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <title>Unit Testing mit ArcObjects</title>
-
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Unit Testing mit ArcObjects</title>
   
 </head><body>
 <h1>Unit Testing mit ArcObjects</h1>
@@ -47,7 +44,7 @@ dass sich findige Entwickler Gedanken gemacht haben, wie man am
 einfachsten
 derartige benötigte Objekte erzeugt. Dies war die Geburtsstunde
 sogenannter
-Mocking-Frameworks
+Mocking-Frameworks.
 <h2>Mocking-Frameworks</h2>
 
 Ein Mocking Framework hat die Aufgabe Mocks zur Verfügung zu
@@ -76,8 +73,42 @@ Klassen und ableitbaren Klassen. Alle bekannten Frameworks (RhinoMocks,
 Moq,
 Dynamic Proxy,
 ..) sind dazu in der Lage.<br>
-
-<br>
+<h3>Beispiel</h3>
+Zum Testen der einfachen Methode<br>
+<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="color: blue;">public</span>&nbsp;<span style="color: blue;">static</span>&nbsp;<span style="color: blue;">void</span>&nbsp;UpdateTimestamp(<span style="color: rgb(43, 145, 175);">IFeature</span>&nbsp;feature)<br></pre>
+lässt sich das Feature mittels Moq beispielsweise wie folgt erzeugen und übergeben<br>
+<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="color: blue;">var</span>&nbsp;feature&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">Mock</span>&lt;<span style="color: rgb(43, 145, 175);">IFeature</span>&gt;().Object;<br><span style="color: rgb(43, 145, 175);">FeatureAudit</span>.UpdateTimestamp(feature);<br></pre>
+Je nach Mocking Framework sind die Verhaltens-basierten Test
+unterschiedlich scharf zu definieren. Insbesondere die originäre Rhino
+Mocks Record/Replay-Syntax dürfte den ein oder anderem zum Verzweifeln
+bringen. Allerdings erlaubt diese Syntax auch die genauesten Test. Die
+neuere AAA-Syntax bzw. die Moq erleichtern den Einstieg in die
+Mocking-Thematik hingegen ungemein.<br>
+<h1>Typemock</h1>
+Typemock ist ein kommerzielles Mocking Framework welches neuerdings in
+einer kostenfreien Basic Edition angeboten wird. Der Funktionsumfang
+geht weiter über die Fähigkeiten der bisher genannten freien Frameworks
+hinaus - beispielsweise die Visual Studio-Integration oder das Mocken
+von statischen Artefakten. Typemock greift dazu sehr tief in die
+.NET-Trickkiste und bedient sich der sogenannten Profiling-API. Daher
+ist es diesem Framework möglich fast jeden Methoden-Aufruf umzubiegen
+und auf eigene Ersetzungen zu lenken. Entsprechende WebCasts von
+Typemock bzw. eigene Spielerein kann man ruhigen Gewissens als
+Augenöffner bezeichnen - sie verändern teilweise grundlegend das eigene
+Verständnis für die Abläufe in der .NET CLR.<br>
+Eine der Domänen von Typemock ist das Einführen von Unit Tests in
+Brownfield-Projekten deren Architekturen nicht den o.g. Best Practices
+folgen.<br>
+Beispiel<br>
+In einem unserer SAP-GIS-Integrations-Projekte hatten wir die
+Aufgabenstellung unverlinkte Objekte zu identifizieren (also Objekte
+die es nur in einer der beiden Welten gab). Dazu war der originale Code
+auf Seiten des GIS:<br>
+<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="color: blue;">internal</span>&nbsp;<span style="color: blue;">void</span>&nbsp;FilterUnlinkedObjects(<span style="color: blue;">string</span>&nbsp;objectClass,&nbsp;<span style="color: rgb(43, 145, 175);">IList</span>&lt;<span style="color: blue;">string</span>&gt;&nbsp;erpIds)<br>{<br>	<span style="color: blue;">var</span>&nbsp;featureClass&nbsp;=&nbsp;GetFeatureClass(objectClass);<br>	_logger.LogMessage(<span style="color: rgb(43, 145, 175);">ServerLogger</span>.<span style="color: rgb(43, 145, 175);">msgType</span>.infoDetailed,&nbsp;SoeName,&nbsp;0,&nbsp;<span style="color: rgb(163, 21, 21);">"..."</span>);<br>	<span style="color: rgb(43, 145, 175);">IQueryFilter</span>&nbsp;filter&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">QueryFilter</span>();<br>	filter.WhereClause&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">FilterUtil</span>.GetWhereClauseWithIn(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>,&nbsp;erpIds,&nbsp;<span style="color: blue;">true</span>);<br>	<span style="color: blue;">var</span>&nbsp;indexErpId&nbsp;=&nbsp;featureClass.FindField(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>);<br>	<span style="color: blue;">var</span>&nbsp;cursor&nbsp;=&nbsp;featureClass.Search(filter,&nbsp;<span style="color: blue;">false</span>);<br>	<span style="color: rgb(43, 145, 175);">IFeature</span>&nbsp;feature;<br>	<span style="color: blue;">while</span>&nbsp;(<span style="color: blue;">null</span>&nbsp;!=&nbsp;(feature&nbsp;=&nbsp;cursor.NextFeature()))<br>	{<br>		<span style="color: blue;">var</span>&nbsp;dbValue&nbsp;=&nbsp;feature.Value[indexErpId];<br>		<span style="color: blue;">if</span>&nbsp;(dbValue&nbsp;==&nbsp;<span style="color: rgb(43, 145, 175);">DBNull</span>.Value)<br>			<span style="color: blue;">continue</span>;<br>		<span style="color: blue;">var</span>&nbsp;erpId&nbsp;=&nbsp;(<span style="color: blue;">string</span>)dbValue;<br>		<span style="color: blue;">if</span>&nbsp;(!<span style="color: blue;">string</span>.IsNullOrEmpty(erpId)&nbsp;&amp;&amp;&nbsp;erpIds.Contains(erpId))<br>			erpIds.Remove(erpId);<br>	}<br>}<br></pre>
+Hier bot sich ein Test an, welcher verifizieren sollte, ob der Teil in
+der Schleife denn auch wirklich die Objekte identifizieren kann,
+welcher in der Liste erpIds angefragt wurden.<br>
+.<br>
 <h2>
 
 Links</h2>
