@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3450983-0606-43F2-A788-F02B5B7683DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EsriDE.ArcAktuell.UnitTesting.Tests</RootNamespace>
+    <AssemblyName>EsriDE.ArcAktuell.UnitTesting.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ESRI.ArcGIS.3DAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.3DAnalyst.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.3DAnalystUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.3DAnalystUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ADF.Connection.Core, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ADF.Connection.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ADF.Connection.Local, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ADF.Connection.Local.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ADF.Core, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ADF.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ADF.Local, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ADF.Local.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Animation, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Animation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.AnimationUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.AnimationUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcCatalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcCatalog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcCatalogUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcCatalogUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcGlobe, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcGlobe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcMap, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcMapUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcMapUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcScan, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcScan.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcScene, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.ArcScene.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.AxControls, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.AxControls.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.AxPublisherControls, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.AxPublisherControls.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Cadastral, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Cadastral.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.CadastralUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.CadastralUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Carto, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Carto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.CartoUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.CartoUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.CartoX, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.CartoX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.CartoXUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.CartoXUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Catalog, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Catalog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.CatalogUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.CatalogUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Controls, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesFile, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DataSourcesFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesGDB, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DataSourcesGDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesNetCDF, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DataSourcesNetCDF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesOleDB, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DataSourcesOleDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesRaster, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DataSourcesRaster.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesRasterUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DataSourcesRasterUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Desktop.AddIns">
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Desktop.AddIns.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Display, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Display.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DisplayUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.DisplayUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Editor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Editor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.EditorExt, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.EditorExt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.EngineCore, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.EngineCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoAnalyst.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Geodatabase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoDatabaseDistributed, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoDatabaseDistributed.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoDatabaseDistributedUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoDatabaseDistributedUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoDatabaseExtensions, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoDatabaseExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoDatabaseUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoDatabaseUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geometry, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Geometry.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geoprocessing, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Geoprocessing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoprocessingUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoprocessingUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geoprocessor, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Geoprocessor.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoReferenceUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoReferenceUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoStatisticalAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoStatisticalAnalyst.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoStatisticalAnalystUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoStatisticalAnalystUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GeoSurvey, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GeoSurvey.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GISClient, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GISClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GlobeCore, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GlobeCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GlobeCoreUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GlobeCoreUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GraphicsCore, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GraphicsCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.GraphicsSymbols, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.GraphicsSymbols.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Location, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Location.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.LocationUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.LocationUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Maplex, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Maplex.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.MaplexUI">
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.MaplexUI.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.NetworkAnalysis, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.NetworkAnalysis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.NetworkAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.NetworkAnalyst.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.NetworkAnalystUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.NetworkAnalystUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Output, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Output.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.OutputExtensions, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.OutputExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.OutputExtensionsUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.OutputExtensionsUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.OutputUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.OutputUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Publisher, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Publisher.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.PublisherControls, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.PublisherControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.PublisherUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.PublisherUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Schematic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Schematic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SchematicControls, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.SchematicControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SchematicUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.SchematicUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Search, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Search.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Server, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Server.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SpatialAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.SpatialAnalyst.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SpatialAnalystUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.SpatialAnalystUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.System, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.System.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SystemUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.SystemUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.TrackingAnalyst, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.TrackingAnalyst.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.TrackingAnalystUI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.TrackingAnalystUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Version, Version=10.0.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Nuget-Packages\Esri.ArcGIS.10.0.0.2414\lib\ESRI.ArcGIS.Version.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\lib\Nuget-Packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\lib\Nuget-Packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TypeMock, Version=7.1.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Typemock\Isolator\7.1\AAA\TypeMock.dll</HintPath>
+    </Reference>
+    <Reference Include="Typemock.ArrangeActAssert, Version=7.1.3.0, Culture=neutral, PublicKeyToken=3dae460033b8d8e2, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Typemock\Isolator\7.1\AAA\Typemock.ArrangeActAssert.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FeatureAuditFixture.cs" />
+    <Compile Include="ObjectFilterFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EsriDE.ArcAktuell.UnitTesting\EsriDE.ArcAktuell.UnitTesting.csproj">
+      <Project>{0FFC95F9-DE97-4B3D-8896-752B8CF38837}</Project>
+      <Name>EsriDE.ArcAktuell.UnitTesting</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
