@@ -1,8 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Unit Testing mit ArcObjects</title>
-  
-</head><body>
+
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Unit Testing mit ArcObjects</title></head><body>
 <h1>Unit Testing mit ArcObjects</h1>
 
 <h2>Motivation</h2>
@@ -23,13 +22,13 @@ eine Komponente nur eine Aufgabe widmet und deren Methoden alle so kurz
 wie
 möglich sein sollten. Damit ergibt sich eine entsprechende Fokussierung
 die
-ihrerseits konkret ohne Seiteneffekte testbar ist.<br>
+ihrerseits dedizierter ohne Seiteneffekte testbar ist.<br>
 
 Schwieriger zu verstehen ist der Testkontext an sich für ArcObjects.
 Möchte man
 beispielsweise eine spezielle Logik auf einem Feature testen, so
 braucht man
-einen Testkandidaten. Allerdings lässt sich ad hoc ein Feature eben
+einen Testkandidaten für ein Feature. Allerdings lässt sich ad hoc ein Feature eben
 nicht
 erzeugen, dafür bedarf es beispielsweise einer FeatureClass, deren
 Verwendbarkeit an Workspaces gekoppelt
@@ -49,7 +48,7 @@ Mocking-Frameworks.
 
 Ein Mocking Framework hat die Aufgabe Mocks zur Verfügung zu
 stellen. Mocks gehen dabei über einfache Platzhalter-Objekte weit
-hinaus [1]. Sie
+hinaus<sup>[1]</sup>. Sie
 lassen sich mit einer gewissen Logik unterlegen dessen korrekter
 Zugriff von
 außen protokolliert werden kann. Üblicherweise sind Unit Tests meist
@@ -69,51 +68,104 @@ entsprechende Instanz des zu mockenden
 Typen erzeugt.
 Das funktioniert u.a. ausgezeichnet für Instanzen von Interfaces,
 abstrakten
-Klassen und ableitbaren Klassen. Alle bekannten Frameworks (RhinoMocks,
-Moq,
+Klassen und ableitbaren Klassen. Alle bekannten Frameworks (Moq<sup>[2]</sup>, RhinoMocks<sup>[3]</sup> ,
 Dynamic Proxy,
 ..) sind dazu in der Lage.<br>
 <h3>Beispiel</h3>
 Zum Testen der einfachen Methode<br>
-<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="color: blue;">public</span>&nbsp;<span style="color: blue;">static</span>&nbsp;<span style="color: blue;">void</span>&nbsp;UpdateTimestamp(<span style="color: rgb(43, 145, 175);">IFeature</span>&nbsp;feature)<br></pre>
+<pre style="background: white none repeat scroll 0% 50%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small><span style="color: blue;">public</span>&nbsp;<span style="color: blue;">static</span>&nbsp;<span style="color: blue;">void</span>&nbsp;UpdateTimestamp(<span style="color: rgb(43, 145, 175);">IFeature</span>&nbsp;feature)</small><br></pre>
 lässt sich das Feature mittels Moq beispielsweise wie folgt erzeugen und übergeben<br>
-<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="color: blue;">var</span>&nbsp;feature&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">Mock</span>&lt;<span style="color: rgb(43, 145, 175);">IFeature</span>&gt;().Object;<br><span style="color: rgb(43, 145, 175);">FeatureAudit</span>.UpdateTimestamp(feature);<br></pre>
-Je nach Mocking Framework sind die Verhaltens-basierten Test
+<pre style="background: white none repeat scroll 0% 50%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small><span style="color: blue;">var</span>&nbsp;feature&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">Mock</span>&lt;<span style="color: rgb(43, 145, 175);">IFeature</span>&gt;().Object;<br><span style="color: rgb(43, 145, 175);">FeatureAudit</span>.UpdateTimestamp(feature);</small><br></pre>
+Je nach Mocking Framework sind die Verhaltens-basierten Tests
 unterschiedlich scharf zu definieren. Insbesondere die originäre Rhino
 Mocks Record/Replay-Syntax dürfte den ein oder anderem zum Verzweifeln
-bringen. Allerdings erlaubt diese Syntax auch die genauesten Test. Die
-neuere AAA-Syntax bzw. die Moq erleichtern den Einstieg in die
-Mocking-Thematik hingegen ungemein.<br>
-<h1>Typemock</h1>
-Typemock ist ein kommerzielles Mocking Framework welches neuerdings in
+bringen. Allerdings erlaubt diese Syntax auch die fokussiertesten Tests. Die
+neuere AAA-Syntax bzw. die Moq-Syntax erleichtern den Einstieg in die
+Mocking-Thematik hingegen ungemein mit einem gewissen Verlust an Kontrolle.<br>
+<h2>Typemock</h2>
+
+Typemock Isolator<sup>[4]</sup> ist ein kommerzielles Mocking Framework welches neuerdings in
 einer kostenfreien Basic Edition angeboten wird. Der Funktionsumfang
 geht weiter über die Fähigkeiten der bisher genannten freien Frameworks
-hinaus - beispielsweise die Visual Studio-Integration oder das Mocken
-von statischen Artefakten. Typemock greift dazu sehr tief in die
+hinaus - Beispiele sind die Visual Studio-Integration oder das Mocken
+von statischen Artefakten. Isolator greift dazu sehr tief in die
 .NET-Trickkiste und bedient sich der sogenannten Profiling-API. Daher
 ist es diesem Framework möglich fast jeden Methoden-Aufruf umzubiegen
-und auf eigene Ersetzungen zu lenken. Entsprechende WebCasts von
-Typemock bzw. eigene Spielerein kann man ruhigen Gewissens als
+und auf eigene Ersetzungen zu lenken. Entsprechende WebCasts von Isolator bzw. eigene Spielerein kann man ruhigen Gewissens als
 Augenöffner bezeichnen - sie verändern teilweise grundlegend das eigene
 Verständnis für die Abläufe in der .NET CLR.<br>
-Eine der Domänen von Typemock ist das Einführen von Unit Tests in
+Eine der Domänen von Isolator ist das Einführen von Unit Tests in
 Brownfield-Projekten deren Architekturen nicht den o.g. Best Practices
 folgen.<br>
-Beispiel<br>
+<h3>
+Beispiel</h3>
+
 In einem unserer SAP-GIS-Integrations-Projekte hatten wir die
 Aufgabenstellung unverlinkte Objekte zu identifizieren (also Objekte
-die es nur in einer der beiden Welten gab). Dazu war der originale Code
+die es nur in einer der beiden Welten gab). Dazu war der originale Legacy-Code<sup>[5]</sup>
 auf Seiten des GIS:<br>
-<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="color: blue;">internal</span>&nbsp;<span style="color: blue;">void</span>&nbsp;FilterUnlinkedObjects(<span style="color: blue;">string</span>&nbsp;objectClass,&nbsp;<span style="color: rgb(43, 145, 175);">IList</span>&lt;<span style="color: blue;">string</span>&gt;&nbsp;erpIds)<br>{<br>	<span style="color: blue;">var</span>&nbsp;featureClass&nbsp;=&nbsp;GetFeatureClass(objectClass);<br>	_logger.LogMessage(<span style="color: rgb(43, 145, 175);">ServerLogger</span>.<span style="color: rgb(43, 145, 175);">msgType</span>.infoDetailed,&nbsp;SoeName,&nbsp;0,&nbsp;<span style="color: rgb(163, 21, 21);">"..."</span>);<br>	<span style="color: rgb(43, 145, 175);">IQueryFilter</span>&nbsp;filter&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">QueryFilter</span>();<br>	filter.WhereClause&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">FilterUtil</span>.GetWhereClauseWithIn(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>,&nbsp;erpIds,&nbsp;<span style="color: blue;">true</span>);<br>	<span style="color: blue;">var</span>&nbsp;indexErpId&nbsp;=&nbsp;featureClass.FindField(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>);<br>	<span style="color: blue;">var</span>&nbsp;cursor&nbsp;=&nbsp;featureClass.Search(filter,&nbsp;<span style="color: blue;">false</span>);<br>	<span style="color: rgb(43, 145, 175);">IFeature</span>&nbsp;feature;<br>	<span style="color: blue;">while</span>&nbsp;(<span style="color: blue;">null</span>&nbsp;!=&nbsp;(feature&nbsp;=&nbsp;cursor.NextFeature()))<br>	{<br>		<span style="color: blue;">var</span>&nbsp;dbValue&nbsp;=&nbsp;feature.Value[indexErpId];<br>		<span style="color: blue;">if</span>&nbsp;(dbValue&nbsp;==&nbsp;<span style="color: rgb(43, 145, 175);">DBNull</span>.Value)<br>			<span style="color: blue;">continue</span>;<br>		<span style="color: blue;">var</span>&nbsp;erpId&nbsp;=&nbsp;(<span style="color: blue;">string</span>)dbValue;<br>		<span style="color: blue;">if</span>&nbsp;(!<span style="color: blue;">string</span>.IsNullOrEmpty(erpId)&nbsp;&amp;&amp;&nbsp;erpIds.Contains(erpId))<br>			erpIds.Remove(erpId);<br>	}<br>}<br></pre>
-Hier bot sich ein Test an, welcher verifizieren sollte, ob der Teil in
+<pre style="background: white none repeat scroll 0% 50%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small><span style="color: blue;">internal</span>&nbsp;<span style="color: blue;">void</span>&nbsp;FilterUnlinkedObjects(<span style="color: blue;">string</span>&nbsp;objectClass,&nbsp;<span style="color: rgb(43, 145, 175);">IList</span>&lt;<span style="color: blue;">string</span>&gt;&nbsp;erpIds)<br>{<br>	<span style="color: blue;">var</span>&nbsp;featureClass&nbsp;=&nbsp;GetFeatureClass(objectClass);<br>	_logger.LogMessage(<span style="color: rgb(43, 145, 175);">ServerLogger</span>.<span style="color: rgb(43, 145, 175);">msgType</span>.infoDetailed,&nbsp;SoeName,&nbsp;0,&nbsp;<span style="color: rgb(163, 21, 21);">"..."</span>);<br>	<span style="color: rgb(43, 145, 175);">IQueryFilter</span>&nbsp;filter&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">QueryFilter</span>();<br>	filter.WhereClause&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">FilterUtil</span>.GetWhereClauseWithIn(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>,&nbsp;erpIds,&nbsp;<span style="color: blue;">true</span>);<br>	<span style="color: blue;">var</span>&nbsp;indexErpId&nbsp;=&nbsp;featureClass.FindField(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>);<br>	<span style="color: blue;">var</span>&nbsp;cursor&nbsp;=&nbsp;featureClass.Search(filter,&nbsp;<span style="color: blue;">false</span>);<br>	<span style="color: rgb(43, 145, 175);">IFeature</span>&nbsp;feature;<br>	<span style="color: blue;">while</span>&nbsp;(<span style="color: blue;">null</span>&nbsp;!=&nbsp;(feature&nbsp;=&nbsp;cursor.NextFeature()))<br>	{<br>		<span style="color: blue;">var</span>&nbsp;dbValue&nbsp;=&nbsp;feature.Value[indexErpId];<br>		<span style="color: blue;">if</span>&nbsp;(dbValue&nbsp;==&nbsp;<span style="color: rgb(43, 145, 175);">DBNull</span>.Value)<br>			<span style="color: blue;">continue</span>;<br>		<span style="color: blue;">var</span>&nbsp;erpId&nbsp;=&nbsp;(<span style="color: blue;">string</span>)dbValue;<br>		<span style="color: blue;">if</span>&nbsp;(!<span style="color: blue;">string</span>.IsNullOrEmpty(erpId)&nbsp;&amp;&amp;&nbsp;erpIds.Contains(erpId))<br>			erpIds.Remove(erpId);<br>	}<br>}</small><br></pre>Für diese Methode bietet sich u.a. ein Test an, welcher verifiziert, ob der Teil in
 der Schleife denn auch wirklich die Objekte identifizieren kann,
-welcher in der Liste erpIds angefragt wurden.<br>
-.<br>
+welcher in der Liste erpIds angefragt wurden.<br>Aufgrund
+des Umfangs dieser Methode entstehen auch für die Testmethode einige
+Zeilen Code um die entsprechenden Fakes zu erzeugen. <br>
+Der testende Code könnte dann wie folgt aussehen:<br>
+<pre style="background: white none repeat scroll 0%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small><span style="color: blue;">var</span>&nbsp;sut&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">ObjectsFilter</span>&gt;(<br>	<span style="color: rgb(43, 145, 175);">Members</span>.CallOriginal,&nbsp;<span style="color: rgb(43, 145, 175);">ConstructorWillBe</span>.Ignored,&nbsp;<span style="color: rgb(43, 145, 175);">BaseConstructorWillBe</span>.Ignored);<br><br><span style="color: blue;">var</span>&nbsp;fakeLogger&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">ServerLogger</span>&gt;(<span style="color: rgb(43, 145, 175);">Members</span>.ReturnNulls,&nbsp;<span style="color: rgb(43, 145, 175);">ConstructorWillBe</span>.Ignored);<br><span style="color: rgb(43, 145, 175);">ObjectState</span>.SetField(sut,&nbsp;<span style="color: rgb(163, 21, 21);">"_logger"</span>,&nbsp;fakeLogger);<br><br><span style="color: blue;">var</span>&nbsp;fakeFeatureClass&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">IFeatureClass</span>&gt;();<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeatureClass.FindField(<span style="color: rgb(163, 21, 21);">"SAP_ID"</span>)).WillReturn(1);<br><br><span style="color: blue;">var</span>&nbsp;fakeQueryFilter&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">QueryFilter</span>&gt;();<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;<span style="color: rgb(43, 145, 175);">ObjectsFilter</span>.GetQueryFilter(<span style="color: blue;">null</span>)).WillReturn(fakeQueryFilter);<br><br><span style="color: blue;">var</span>&nbsp;fakeFeatureCursor&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">IFeatureCursor</span>&gt;();<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeatureClass.Search(<span style="color: blue;">null</span>,&nbsp;<span style="color: blue;">false</span>)).WillReturn(fakeFeatureCursor);<br><br><span style="color: blue;">var</span>&nbsp;fakeFeature1&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">IFeature</span>&gt;();<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeature1.Value[1]).WillReturn(<span style="color: rgb(163, 21, 21);">"1001"</span>);<br><br><span style="color: blue;">var</span>&nbsp;fakeFeature2&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">IFeature</span>&gt;();<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeature2.Value[1]).WillReturn(<span style="color: rgb(163, 21, 21);">"1002"</span>);<br><br><span style="color: blue;">var</span>&nbsp;fakeFeature3&nbsp;=&nbsp;<span style="color: rgb(43, 145, 175);">Isolate</span>.Fake.Instance&lt;<span style="color: rgb(43, 145, 175);">IFeature</span>&gt;();<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeature3.Value[1]).WillReturn(<span style="color: rgb(163, 21, 21);">"1003"</span>);<br><br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeatureCursor.NextFeature()).WillReturn(fakeFeature1);<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeatureCursor.NextFeature()).WillReturn(fakeFeature2);<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeatureCursor.NextFeature()).WillReturn(fakeFeature3);<br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;fakeFeatureCursor.NextFeature()).WillReturn(<span style="color: blue;">null</span>);<br><br><span style="color: rgb(43, 145, 175);">Isolate</span>.WhenCalled(()&nbsp;=&gt;&nbsp;sut.GetFeatureClass(<span style="color: rgb(163, 21, 21);">"foo"</span>)).WillReturn(fakeFeatureClass);<br><br><span style="color: blue;">var</span>&nbsp;fakeErpIds&nbsp;=&nbsp;<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">List</span>&lt;<span style="color: blue;">string</span>&gt;&nbsp;{&nbsp;<span style="color: rgb(163, 21, 21);">"999"</span>,&nbsp;<span style="color: rgb(163, 21, 21);">"1002"</span>,&nbsp;<span style="color: rgb(163, 21, 21);">"1004"</span>&nbsp;};<br><br>sut.FilterUnlinkedObjects(<span style="color: rgb(163, 21, 21);">"objectClass"</span>,&nbsp;fakeErpIds);<br><br><span style="color: rgb(43, 145, 175);">Assert</span>.That(fakeErpIds,&nbsp;<span style="color: rgb(43, 145, 175);">Is</span>.EquivalentTo(<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">List</span>&lt;<span style="color: blue;">string</span>&gt;&nbsp;{&nbsp;<span style="color: rgb(163, 21, 21);">"999"</span>,&nbsp;<span style="color: rgb(163, 21, 21);">"1004"</span>&nbsp;}));</small><br></pre>
+Während des Schreibens vom Testcode fiel auf, dass Typemock nicht in
+der Lage war die beiden Zeilen mit dem QueryFilter zu umschiffen. In
+solchen Fällen hilft ein kleines Extract Method Refactoring in eine
+GetQueryFilter-Method, deren Aufruf sich nun einfach mocken lässt.<br>
+<pre style="background: white none repeat scroll 0% 50%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small><span style="color: rgb(43, 145, 175);">ObjectsFilter</span>.GetQueryFilter(<span style="color: blue;">null</span>)).WillReturn(fakeQueryFilter)</small></pre>
+
+Die nächsten Zeilen dienen dazu eine Cursor-Logik zu implementieren
+welche drei Features mit bestimmten Ids erzeugt. Diese Ids werden dann
+gegen eine zweite Referenz-Id-Liste verglichen mittels:<br>
+<pre style="background: white none repeat scroll 0% 50%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small>sut.FilterUnlinkedObjects(<span style="color: rgb(163, 21, 21);">"objectClass"</span>,&nbsp;fakeErpIds);</small></pre>
+
+Das ist die eigentliche zu testende Logik - also der Aufruf des bestehenden Codes.<br>
+Abschließend wird verifiziert, ob die Referenz-Id-Liste durch die Logik
+um die vorhandenen Ids gekürzt wurde. Übrig bleiben dürfen dann nur die
+Ids welche nicht in den Features vorkommen - das sind 999 und 1004.<br>
+<pre style="background: white none repeat scroll 0% 50%; font-family: Consolas; color: black; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><small><span style="color: rgb(43, 145, 175);">Assert</span>.That(fakeErpIds,&nbsp;<span style="color: rgb(43, 145, 175);">Is</span>.EquivalentTo(<span style="color: blue;">new</span>&nbsp;<span style="color: rgb(43, 145, 175);">List</span>&lt;<span style="color: blue;">string</span>&gt;&nbsp;{&nbsp;<span style="color: rgb(163, 21, 21);">"999"</span>,&nbsp;<span style="color: rgb(163, 21, 21);">"1004"</span>&nbsp;}));</small></pre>
+
+Mit dieser abschließenden Assertion zeigt sich auch, dass
+Status-basiertes und Verhaltens-basiertes sich mixen lassen. Das
+erlaubt einen fließenden Übergang zwischen diesen beiden Welten.
+Allerdings ist sollte man dies meiden.<sup>[6]</sup> <br>
+<h2>Ausblick</h2>
+Mocking Frameworks erlauben durch das einfache Erzeugen verschiedenster
+ArcObjects und das elegante Überspringen nicht relevanter Logik einen
+deutlich leichteren Einstieg in die ArcObjects Unit Testing Welt, als
+bei ausschließlicher Beschränkung auf Testing Frameworks.<br>
+Als Einstieg kann man Moq und Typemock Basis aufgrund ihrer Einfachheit empfehlen.<br>
+Für intensives Unit Testing ist Typemock Essential sicher die richtige
+Wahl. Mit dieser Edition kann Brownfield-Code aufgebrochen werden und
+es lassen sich alle .NET-Artefakte mocken.<br>
+Der dargestellte Sourcecode ist zum Download auf GitHub zur Verfügung gestellt.<sup>[7]</sup><br>
 <h2>
 
-Links</h2>
-[1] Mocks Aren't Stubs<br>
-http://martinfowler.com/articles/mocksArentStubs.html<br>
+Links</h2><sup>
+[1]</sup> Martin Fowler: Mocks Aren't Stubs<br>
+http://bit.ly/TarmBZ<br>
+<sup>[2]</sup> Moq<br>
+http://code.google.com/p/moq/<br>
+<sup>[3]</sup> Rhino Mocks<br>
+http://bit.ly/QALmKg<br>
+<sup>[4]</sup> Typemock Isolator<br>
+http://bit.ly/SI7GPS<br>
+<sup>[5]</sup> Michael C. Feathers: Effektives Arbeiten mit Legacy Code<br>
+http://amzn.to/SPCQWe<br>
+<sup>[6]</sup> Roy Osherove: The Art of Unit Testing<br>
+http://amzn.to/PXRHyv<br>
+<sup>[7]</sup> Sourcecode auf GitHub<br>
+http://bit.ly/OI3Ifu<br>
+<br>
+<br>
+Marko Apfel<br>
+m.apfel@esri.de <br>
+http://geekswithblogs.net/mapfel/ <br>
+Esri Deutschland GmbH, Kranzberg<br>
+<br>
 <br>
 <br>
 
