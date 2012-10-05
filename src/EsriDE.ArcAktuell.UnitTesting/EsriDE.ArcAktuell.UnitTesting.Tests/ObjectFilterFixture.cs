@@ -8,10 +8,11 @@ using TypeMock.ArrangeActAssert;
 
 namespace EsriDE.ArcAktuell.UnitTesting.Tests
 {
-	public class ObjectFilterFixture
+    [TestFixture]
+    public class ObjectFilterFixture
 	{
 		[Test, Isolated]
-		public void Do()
+		public void filter_unlinked_objects_with_intersecting_Ids_returns_intersection()
 		{
 			try
 			{
